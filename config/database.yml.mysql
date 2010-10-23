@@ -1,0 +1,23 @@
+connection: &connection
+  username: showire
+  password: h0ly_d1ck
+  adapter: mysql
+  encoding: utf8
+  host: localhost
+
+# SQLite version 3.x
+#   gem install sqlite3-ruby (not necessary on OS X Leopard)
+development:
+  database: showire
+  <<: *connection
+
+# Warning: The database defined as "test" will be erased and
+# re-generated from your development database when you run "rake".
+# Do not set this db to the same as development or production.
+test:
+  database: showire
+  <<: *connection
+
+production:
+  database: showire
+  <<: *connection
