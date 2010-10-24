@@ -2,7 +2,8 @@ class EpisodesController < ApplicationController
   # GET /episodes
   # GET /episodes.xml
   def index
-    @episodes = Episode.all
+    @show = Show.find(params[:show_id])
+    @episodes = @show.episodes
 
     respond_to do |format|
       format.html # index.html.erb
@@ -44,7 +45,7 @@ class EpisodesController < ApplicationController
 
     respond_to do |format|
       if @episode.save
-        format.html { redirect_to(@episode, :notice => 'Episode was successfully created.') }
+        format.html { redirect_to(show_episode_path(@episode.show_id, @episode), :notice => 'Episode was successfully created.') }
         format.xml  { render :xml => @episode, :status => :created, :location => @episode }
       else
         format.html { render :action => "new" }
@@ -60,7 +61,7 @@ class EpisodesController < ApplicationController
 
     respond_to do |format|
       if @episode.update_attributes(params[:episode])
-        format.html { redirect_to(@episode, :notice => 'Episode was successfully updated.') }
+        format.html { redirect_to(show_episode_path(@episode.show_id, @episode), :notice => 'Episode was successfully updated.') }
         format.xml  { head :ok }
       else
         format.html { render :action => "edit" }
@@ -73,10 +74,11 @@ class EpisodesController < ApplicationController
   # DELETE /episodes/1.xml
   def destroy
     @episode = Episode.find(params[:id])
+    show_id = @episode.show_id
     @episode.destroy
 
     respond_to do |format|
-      format.html { redirect_to(episodes_url) }
+      format.html { redirect_to(show_episodes_url(show_id)) }
       format.xml  { head :ok }
     end
   end

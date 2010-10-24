@@ -13,10 +13,46 @@
     <%= yield :additional_js %>
   </head>
   <body>
-  <p class="notice"><%= notice %></p>
-       <p class="alert"><%= alert %></p>
-
-    <%= yield %>
-
+    <div id="container">
+      <div id="header" class="header-client">
+        <%= link_to '<span><h1>Showire</h1></span>'.html_safe, root_url, :title => t(".title") %>
+        <ul id="header_menu">
+          <li id=""><%= link_to t(".link_homepage"), root_path, :title => t(".link_homepage") %></li>
+          <li id=""><%= link_to t(".link_shows"), shows_path, :title => t(".link_shows") %></li>
+        </ul>
+      </div>
+      <div id="headbar" class="headbar-client">
+        <%#= user_signed_in? ? render(:partial => "users/headbar_logged") : render(:partial => "users/headbar_sign_in") %>
+      </div>
+      <div id="content">
+        <% flash.each do |key, msg| %>
+          <%= content_tag :div, msg, :id => key %>
+        <% end %>
+        <%= yield %>
+      </div>
+      <div id="footer">
+        <div id="footer_lang_switcher">
+          <ul>
+            <% I18n.available_locales.each do |locale| %>
+              <%= locale_switch_tag :locale => locale.to_s %>
+            <% end %>
+          </ul>
+          <div id="footer_links">
+            <ul>
+              <li><a href="#" title="Qui sommes nous">Qui sommes nous</a> | </li>
+              <li><a href="#" title="Partenaires">Partenaires</a> | </li>
+              <li><a href="#" title="Données personnelles">Données personnelles</a> | </li>
+              <li><a href="#" title="Contact">Contact</a> | </li>
+            </ul>
+          </div>
+          <div id="footer_copyright">
+            <p>Showire - Copyright &copy; 2007-<%= Time.now.year %> - Tous droits réservés</p>
+          </div>
+        </div>
+        <div id="footer_logo_bcs"><a href="#" title="Showire"><span>Showire</span></a></div>
+      </div>
+    </div>
+    <%= yield :additional_js_bottom %>
+    <%= javascript_include_tag 'application_bottom' %>
   </body>
 </html>

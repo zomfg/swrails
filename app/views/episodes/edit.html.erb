@@ -2,5 +2,5 @@
 
 <%= render 'form' %>
 
-<%= link_to 'Show', @episode %> |
-<%= link_to 'Back', episodes_path %>
+<%= link_to 'Show', show_episode_path(@episode.show_id, @episode) %> |
+<%= link_to 'Back', show_episodes_path %>

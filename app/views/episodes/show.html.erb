@@ -1,8 +1,8 @@
 <p id="notice"><%= notice %></p>
 
 <p>
-  <b>Tite:</b>
-  <%= @episode.tite %>
+  <b>Title:</b>
+  <%= @episode.title %>
 </p>
 
 <p>
@@ -26,5 +26,5 @@
 </p>
 
 
-<%= link_to 'Edit', edit_episode_path(@episode) %> |
-<%= link_to 'Back', episodes_path %>
+<%= link_to 'Edit', edit_show_episode_path(@episode.show_id, @episode) %> |
+<%= link_to 'Back', show_episodes_path %>

@@ -1,0 +1,6 @@
+## YAML Template.
+en:
+  layouts:
+    application:
+      title: Home
+      link_homepage: Home
